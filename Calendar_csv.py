@@ -56,7 +56,12 @@ def goRange(y1, m1, y2, m2):
 
 
 if __name__ == "__main__":
-    goRange(2021, 12, 2022, 12)
+    y1 = int(input('请输入起始年份(如2021)：'))
+    m1 = int(input('请输入起始年份(如9)：'))
+    y2 = int(input('请输入起始年份(如2022)：'))
+    m2 = int(input('请输入起始年份(如12)：'))
+    print('正在下载数据...')
+    goRange(y1, m1, y2, m2)
 
     with open(datetime.datetime.now().strftime('%Y%m%d%H%M%S') + '.csv',
               'w') as f:
