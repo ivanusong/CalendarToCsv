@@ -6,7 +6,6 @@ import datetime
 # 定义一个列表变量存放所有数据
 shtData = []
 
-
 def go(y, m):
     url = f"https://sp0.baidu.com/8aQDcjqpAAV3otqbppnN2DJv/api.php?query={str(y)}年{str(m)}月&co=&resource_id=39043&t=1601954930239&ie=utf8&oe=gbk&format=json&tn=wisetpl&_=1601950837128"
     response = json.loads(requests.request("GET", url).text)
@@ -58,11 +57,11 @@ def goRange(y1, m1, y2, m2):
 
 
 if __name__ == "__main__":
-    y1 = int(input('请输入起始年份(如2021)：'))
-    m1 = int(input('请输入起始年份(如9)：'))
-    y2 = int(input('请输入起始年份(如2022)：'))
-    m2 = int(input('请输入起始年份(如12)：'))
-    print('正在下载数据...')
+    y1 = int(input('请输入起始年份 (如 2021)：'))
+    m1 = int(input('请输入起始月份 (如 9)：'))
+    y2 = int(input('请输入结束年份 (如 2022)：'))
+    m2 = int(input('请输入结束月份 (如 12)：'))
+
     goRange(y1, m1, y2, m2)
 
     with open(datetime.datetime.now().strftime('%Y%m%d%H%M%S') + '.csv',
