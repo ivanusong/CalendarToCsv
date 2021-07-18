@@ -1,1 +1,5 @@
 *.csv
+build/*
+dist/*
+Calendar_csv.spec
+.DS_Store
