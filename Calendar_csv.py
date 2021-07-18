@@ -6,6 +6,7 @@ import datetime
 # 定义一个列表变量存放所有数据
 shtData = []
 
+
 def go(y, m):
     url = f"https://sp0.baidu.com/8aQDcjqpAAV3otqbppnN2DJv/api.php?query={str(y)}年{str(m)}月&co=&resource_id=39043&t=1601954930239&ie=utf8&oe=gbk&format=json&tn=wisetpl&_=1601950837128"
     response = json.loads(requests.request("GET", url).text)
@@ -39,9 +40,10 @@ def go(y, m):
             # 如果月份是个位数，则前边补 0 ，这样方便直接粘贴在表格中不会错位
             month = '0' + i['month'] if len(i['month']) == 1 else i['month']
             # 如果日为个位数，则补 0 ，目的同上
-            day = '0' + i['day'] if len(i['day']) == 1 else i['day']
+            day = ('0' + i['day']) if len(i['day']) == 1 else i['day']
             # 存入数据至全局变量
-            shtData.append([i['year'], month, day, day_yl])
+            shtData.append([i['year'], month + '\t', day + '\t', day_yl])
+
 
 def goRange(y1, m1, y2, m2):
     for y in range(y1, y2 + 1):
