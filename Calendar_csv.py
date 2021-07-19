@@ -2,13 +2,16 @@ import requests
 import json
 import csv
 import datetime
+import sys
 
 # 定义一个列表变量存放所有数据
 shtData = []
 
+
 def go(y, m):
     url = f"https://sp0.baidu.com/8aQDcjqpAAV3otqbppnN2DJv/api.php?query={str(y)}年{str(m)}月&co=&resource_id=39043&t=1601954930239&ie=utf8&oe=gbk&format=json&tn=wisetpl&_=1601950837128"
     response = json.loads(requests.request("GET", url).text)
+    sys.stdout.write('==')
     for i in response['data'][0]['almanac']:
         # 因为每次请求 api 会返回当月以及前后两个月的信息，所以判断月份是查询月则继续
         if i['month'] == str(m):
@@ -37,7 +40,7 @@ def go(y, m):
                             day_yl = i['lDate']
 
             # 如果月份是个位数，则前边补 0 ，这样方便直接粘贴在表格中不会错位
-            month = '0' + i['month'] if len(i['month']) == 1 else i['month']
+            month = ('0' + i['month']) if len(i['month']) == 1 else i['month']
             # 如果日为个位数，则补 0 ，目的同上
             day = ('0' + i['day']) if len(i['day']) == 1 else i['day']
             # 存入数据至全局变量
@@ -61,11 +64,11 @@ if __name__ == "__main__":
     m1 = int(input('请输入起始月份 (如 9)：'))
     y2 = int(input('请输入结束年份 (如 2022)：'))
     m2 = int(input('请输入结束月份 (如 12)：'))
-
+    print('正在获取...')
     goRange(y1, m1, y2, m2)
 
-    with open(datetime.datetime.now().strftime('%Y%m%d%H%M%S') + '.csv',
-              'w') as f:
+    fileName = datetime.datetime.now().strftime('%Y%m%d%H%M%S') + '.csv'
+    with open(fileName, 'w') as f:
         #创建csv文件的写入对象
         writer = csv.writer(f)
         #写一行,格式:['第1个单元格数据', '第2个单元格数据']
@@ -74,3 +77,5 @@ if __name__ == "__main__":
         #格式：[(第1行数据), (第2行数据), (第3行数据)]
         #备注:可以用元祖包裹一行，也可以用列表包裹一行
         writer.writerows(shtData)
+
+    print('\n获取完毕，保存成功！\n' + fileName)
