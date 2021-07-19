@@ -44,7 +44,7 @@ def go(y, m):
             # 如果日为个位数，则补 0 ，目的同上
             day = ('0' + i['day']) if len(i['day']) == 1 else i['day']
             # 存入数据至全局变量
-            shtData.append([i['year'], month + '\t', day + '\t', day_yl])
+            shtData.append([i['year'], month, day, day_yl])
 
 
 def goRange(y1, m1, y2, m2):
