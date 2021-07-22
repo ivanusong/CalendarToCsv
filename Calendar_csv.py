@@ -68,7 +68,7 @@ if __name__ == "__main__":
     goRange(y1, m1, y2, m2)
 
     fileName = datetime.datetime.now().strftime('%Y%m%d%H%M%S') + '.csv'
-    with open(fileName, 'w') as f:
+    with open(fileName, 'w', newline='') as f:
         #创建csv文件的写入对象
         writer = csv.writer(f)
         #写一行,格式:['第1个单元格数据', '第2个单元格数据']
